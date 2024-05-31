@@ -1,6 +1,10 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id ("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
+    id("androidx.navigation.safeargs.kotlin")
+
 }
 
 android {
@@ -35,6 +39,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 }
 
@@ -51,4 +56,17 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //RetroFit
+    implementation (libs.retrofit2)
+    implementation (libs.retrofit2.converter)
+    implementation (libs.gson)
+    implementation (libs.okhttp3)
+
+    // Coroutine
+    implementation (libs.coroutine)
+
+    // Hilt
+    implementation(libs.com.google.dagger)
+    kapt (libs.hilt.compiler)
 }
