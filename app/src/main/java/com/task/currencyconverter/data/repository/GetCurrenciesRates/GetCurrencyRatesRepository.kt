@@ -1,4 +1,4 @@
-package com.task.currencyconverter.data.repository
+package com.task.currencyconverter.data.repository.GetCurrenciesRates
 import com.task.currencyconverter.data.model.CurrencyRatesResponseModel
 import com.task.currencyconverter.utils.Result
 

@@ -1,15 +1,14 @@
 package com.task.currencyconverter.di
 
-import android.content.Context
-import android.util.Log
 import com.task.currencyconverter.data.api.ApiService
 import com.task.currencyconverter.data.api.ApiService.Companion.BASE_URL
-import com.task.currencyconverter.data.repository.GetCurrencyRatesRepository
-import com.task.currencyconverter.data.repository.GetCurrencyRatesRepositoryImpl
+import com.task.currencyconverter.data.repository.GetCurrenciesRates.GetCurrencyRatesRepository
+import com.task.currencyconverter.data.repository.GetCurrenciesRates.GetCurrencyRatesRepositoryImpl
+import com.task.currencyconverter.data.repository.GetCurrenciesRatesByDate.GetCurrenciesRatesByDateRepository
+import com.task.currencyconverter.data.repository.GetCurrenciesRatesByDate.GetCurrenciesRatesByDateRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -52,7 +51,12 @@ object AppModule {
     }
     @Provides
     @Singleton
-    fun provideLoginRepository(apiService: ApiService): GetCurrencyRatesRepository {
+    fun provideGetCurrencyRatesRepository(apiService: ApiService): GetCurrencyRatesRepository {
         return GetCurrencyRatesRepositoryImpl(apiService)
+    }
+    @Provides
+    @Singleton
+    fun provideGetCurrencyRatesByDateRepository(apiService: ApiService): GetCurrenciesRatesByDateRepository {
+        return GetCurrenciesRatesByDateRepositoryImpl(apiService)
     }
 }

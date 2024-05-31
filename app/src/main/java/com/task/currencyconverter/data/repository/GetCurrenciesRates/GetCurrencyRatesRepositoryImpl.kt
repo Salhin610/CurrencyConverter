@@ -1,4 +1,4 @@
-package com.task.currencyconverter.data.repository
+package com.task.currencyconverter.data.repository.GetCurrenciesRates
 
 import com.task.currencyconverter.data.api.ApiService
 import com.task.currencyconverter.data.model.CurrencyRatesResponseModel
@@ -7,7 +7,8 @@ import org.json.JSONException
 import javax.inject.Inject
 import org.json.JSONObject
 
-class GetCurrencyRatesRepositoryImpl @Inject constructor(private val apiService: ApiService) : GetCurrencyRatesRepository {
+class GetCurrencyRatesRepositoryImpl @Inject constructor(private val apiService: ApiService) :
+    GetCurrencyRatesRepository {
     override suspend fun getCurrencyRates(): Result<CurrencyRatesResponseModel> {
         return try {
             val response = apiService.

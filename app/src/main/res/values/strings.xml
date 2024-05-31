@@ -161,6 +161,16 @@
         <item>ZMW</item>
         <item>ZWL</item>
     </string-array>
-
-
+    <string-array name="common_currency_array">
+        <item>AED</item>
+        <item>EGP</item>
+        <item>EUR</item>
+        <item>GBP</item>
+        <item>IQD</item>
+        <item>KWD</item>
+        <item>OMR</item>
+        <item>QAR</item>
+        <item>SAR</item>
+        <item>USD</item>
+    </string-array>
 </resources>

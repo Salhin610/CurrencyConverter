@@ -36,9 +36,18 @@ class HomeFragment : Fragment() {
 
 
         binding.detailsScreen.setOnClickListener {
-            val selectedCurrency = binding.spinnerCurrency1.selectedItem.toString()
-            val action = HomeFragmentDirections.actionNavigationHomeToNavigationDetails(selectedCurrency)
-            findNavController().navigate(action)
+
+            val bundle = Bundle().apply {
+
+
+                this.putString("selectedCurrency", binding.spinnerCurrency1.selectedItem.toString())
+                this.putString("secondCurrency", binding.spinnerCurrency2.selectedItem.toString())
+                this.putString("todayRate", viewModel.getTodayRateForUnit())
+                this.putDoubleArray("listOfRatesAgainstCommon", viewModel.getCommonCurrenciesRates())
+            }
+
+            // Navigate to the details fragment
+            findNavController().navigate(R.id.navigation_details, bundle)
         }
         viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
             errorMessage?.let {

@@ -58,9 +58,6 @@ class HomeViewModel @Inject constructor(
                     is Result.Error ->{
                         _error.postValue(response.exception?.message)
                     }
-                    else ->{
-
-                    }
                 }
                 else
                     _error.postValue("Check Internet Connection")
@@ -88,6 +85,17 @@ class HomeViewModel @Inject constructor(
         isConversionInProgress = false
     }
 
+    fun getTodayRateForUnit(): String{
+        val index1 = currency1Index.value ?: 0
+        val index2 = currency2Index.value ?: 0
+
+        val rate1 = _rates[appContext.resources.getStringArray(R.array.currency_array)[index1]] ?: 1.0
+        val rate2 = _rates[appContext.resources.getStringArray(R.array.currency_array)[index2]] ?: 1.0
+
+
+            return String.format("%.3f",  rate2 / rate1)
+
+    }
     fun swapCurrencies() {
         val tempIndex = currency1Index.value
         currency1Index.value = currency2Index.value
@@ -100,5 +108,30 @@ class HomeViewModel @Inject constructor(
 
         // Trigger conversion to update amounts after swap
         convertCurrency(true)
+    }
+
+    fun getCommonCurrenciesRates(): DoubleArray {
+        val commonCurrencyArray = appContext.resources.getStringArray(R.array.common_currency_array)
+        val index1 = currency1Index.value ?: 0
+
+        val baseCurrency = appContext.resources.getStringArray(R.array.currency_array)[index1]
+        val baseRate = _rates[baseCurrency]
+        if (baseRate == null) {
+            _error.postValue("The rate for the base currency $baseCurrency is not available")
+            return DoubleArray(0)        }
+        // List to store the rates against the base currency
+        val ratesList = mutableListOf<Double>()
+
+        // Loop through the commonCurrencyArray and calculate the rates against the base currency
+        for (currency in commonCurrencyArray) {
+            val rate = _rates[currency]
+            if (rate != null) {
+                val rateAgainstBase = rate / baseRate
+                ratesList.add(rateAgainstBase)
+            } else {
+                ratesList.add(Double.NaN) // NaN to indicate rate not available
+            }
+        }
+        return ratesList.toDoubleArray()
     }
 }

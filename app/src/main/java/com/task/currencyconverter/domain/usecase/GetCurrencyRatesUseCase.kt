@@ -1,7 +1,7 @@
 package com.task.currencyconverter.domain.usecase
 
 import com.task.currencyconverter.data.model.CurrencyRatesResponseModel
-import com.task.currencyconverter.data.repository.GetCurrencyRatesRepository
+import com.task.currencyconverter.data.repository.GetCurrenciesRates.GetCurrencyRatesRepository
 import javax.inject.Inject
 import com.task.currencyconverter.utils.Result
 
