@@ -1,11 +1,8 @@
 package com.task.currencyconverter.utils
 
-import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.net.NetworkInfo
-import android.os.Build
 
 object Utils {
      fun isInternetAvailable(context: Context): Boolean {

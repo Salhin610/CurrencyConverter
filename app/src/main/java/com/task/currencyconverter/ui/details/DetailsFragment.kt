@@ -1,7 +1,6 @@
 package com.task.currencyconverter.ui.details
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +36,6 @@ class DetailsFragment : Fragment() {
         viewModel.currency2.postValue(arguments?.getString("secondCurrency"))
         viewModel.rateOnDay1.postValue(arguments?.getString("todayRate"))
         viewModel.commonRates.postValue(arguments?.getDoubleArray("listOfRatesAgainstCommon"))
-        Log.e("Test", arguments?.getDoubleArray("listOfRatesAgainstCommon")?.get(0).toString())
 
         binding
             .commonCurrenciesRates

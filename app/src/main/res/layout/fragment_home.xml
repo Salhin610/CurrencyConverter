@@ -1,5 +1,4 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
             name="viewModel"
@@ -27,7 +26,7 @@
                 android:id="@+id/button_swap"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Swap"
+                android:text="@string/swap"
                 android:onClick="@{() -> viewModel.swapCurrencies()}" />
             <Spinner
                 android:layout_weight="1"
@@ -49,7 +48,8 @@
                 android:id="@+id/edittext_amount1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={viewModel.amount1}" />
+                android:text="@={viewModel.amount1}"
+                android:autofillHints="" />
 
 
             <EditText
@@ -58,13 +58,14 @@
                 android:id="@+id/edittext_amount2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={viewModel.amount2}" />
+                android:text="@={viewModel.amount2}"
+                android:autofillHints="" />
         </LinearLayout>
 
         <Button
             android:id="@+id/details_screen"
             android:layout_gravity="center"
-            android:text="Details"
+            android:text="@string/details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>

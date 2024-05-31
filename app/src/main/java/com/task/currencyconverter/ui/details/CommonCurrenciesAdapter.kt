@@ -1,6 +1,5 @@
 package com.task.currencyconverter.ui.details
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,8 +7,7 @@ import com.task.currencyconverter.databinding.ItemRecyclerCommonCurrenciesListBi
 
 class CommonCurrenciesAdapter(private val commonCurrenciesList: Array<String>, private val commonCurrenciesRates: DoubleArray): RecyclerView.Adapter<CommonCurrenciesAdapter.ViewHolder>(){
 
-    class ViewHolder(val binding: ItemRecyclerCommonCurrenciesListBinding) : RecyclerView.ViewHolder(binding.root) {
-    }
+    class ViewHolder(val binding: ItemRecyclerCommonCurrenciesListBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
@@ -24,7 +22,6 @@ class CommonCurrenciesAdapter(private val commonCurrenciesList: Array<String>, p
     }
 
     override fun getItemCount(): Int {
-        Log.e("TestRecyclersize", "${commonCurrenciesRates.size} test")
 
         return commonCurrenciesRates.size
     }

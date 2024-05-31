@@ -5,18 +5,17 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.task.currencyconverter.data.repository.GetCurrenciesRatesByDate.GetCurrenciesRatesByDateRepository
+import com.task.currencyconverter.domain.usecase.GetCurrencyRatesByDateUseCase
 import com.task.currencyconverter.utils.Result
 import com.task.currencyconverter.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
-    private val getCurrencyRatesUseCase: GetCurrenciesRatesByDateRepository,
+    private val getCurrencyRatesUseCase: GetCurrencyRatesByDateUseCase,
     application: Application
 ) : AndroidViewModel(application) {
     private val appContext = getApplication<Application>().applicationContext
@@ -29,14 +28,13 @@ class DetailsViewModel @Inject constructor(
     val day1Date = MutableLiveData<String>()
     val day2Date = MutableLiveData<String>()
     val day3Date = MutableLiveData<String>()
-    val _rates = HashMap<String, Double>()
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
-    val today = LocalDate.now()
+    private val today: LocalDate = LocalDate.now()
 
-    val yesterday = today.minusDays(1)
-    val dayBeforeYesterday = today.minusDays(2)
+    private val yesterday: LocalDate = today.minusDays(1)
+    private val dayBeforeYesterday: LocalDate = today.minusDays(2)
 
     init {
 
@@ -51,7 +49,7 @@ class DetailsViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 if (Utils.isInternetAvailable(appContext))
-                    when(val response = getCurrencyRatesUseCase.getCurrencyRatesByDate(yesterday.toString())){
+                    when(val response = getCurrencyRatesUseCase.getCurrenciesRateByDate(yesterday.toString())){
                         is Result.Success ->{
                             val rateAgainstBase =   response.data.rates[currency2.value]!! /response.data.rates[currency1.value]!!
                             rateOnDay2.postValue(String.format("%.3f",  rateAgainstBase))
@@ -71,7 +69,7 @@ class DetailsViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 if (Utils.isInternetAvailable(appContext))
-                    when(val response = getCurrencyRatesUseCase.getCurrencyRatesByDate(dayBeforeYesterday.toString())){
+                    when(val response = getCurrencyRatesUseCase.getCurrenciesRateByDate(dayBeforeYesterday.toString())){
                         is Result.Success ->{
                             val rateAgainstBase =   response.data.rates[currency2.value]!! / response.data.rates[currency1.value]!!
                             rateOnDay3.postValue(String.format("%.3f",  rateAgainstBase))

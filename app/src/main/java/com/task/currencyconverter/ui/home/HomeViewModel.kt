@@ -1,8 +1,6 @@
 package com.task.currencyconverter.ui.home
 
 import android.app.Application
-import android.content.Context
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.task.currencyconverter.R
 import com.task.currencyconverter.domain.usecase.GetCurrencyRatesUseCase
 import com.task.currencyconverter.utils.Result
-import com.task.currencyconverter.utils.Utils
 import com.task.currencyconverter.utils.Utils.isInternetAvailable
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -21,16 +18,16 @@ class HomeViewModel @Inject constructor(
     private val getCurrencyRatesUseCase: GetCurrencyRatesUseCase,
     application: Application
 ) : AndroidViewModel(application) {
-    val _rates = HashMap<String, Double>()
+    private val _rates = HashMap<String, Double>()
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
     val currency1Index = MutableLiveData<Int>()
-    val currency2Index = MutableLiveData<Int>()
+    val currency2Index = MutableLiveData<Int?>()
     private val appContext = getApplication<Application>().applicationContext
     val amount1 = MutableLiveData<String>()
-    val amount2 = MutableLiveData<String>()
+    val amount2 = MutableLiveData<String?>()
 
     private var isConversionInProgress = false
 
@@ -47,7 +44,7 @@ class HomeViewModel @Inject constructor(
         currency2Index.observeForever { convertCurrency(false) }
     }
 
-    fun fetchRates() {
+    private fun fetchRates() {
         viewModelScope.launch {
             try {
                 if (isInternetAvailable(appContext))
@@ -67,7 +64,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun convertCurrency(fromAmount1: Boolean) {
+    private fun convertCurrency(fromAmount1: Boolean) {
         val index1 = currency1Index.value ?: 0
         val index2 = currency2Index.value ?: 0
         val amount1Value = amount1.value?.toDoubleOrNull() ?: 1.0

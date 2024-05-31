@@ -3,7 +3,6 @@ package com.task.currencyconverter.data.api
 import com.task.currencyconverter.data.model.CurrencyRatesResponseModel
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.Path
 
 

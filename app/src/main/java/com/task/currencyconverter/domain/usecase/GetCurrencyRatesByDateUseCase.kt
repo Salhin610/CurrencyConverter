@@ -5,8 +5,8 @@ import com.task.currencyconverter.data.repository.GetCurrenciesRatesByDate.GetCu
 import com.task.currencyconverter.utils.Result
 import javax.inject.Inject
 
-class GetCurrencyRatesByDate @Inject constructor(private val getCurrencyRatesByDateRepository: GetCurrenciesRatesByDateRepository) {
-    suspend fun getCurrenciesRate(date: String): Result<CurrencyRatesResponseModel> {
+class GetCurrencyRatesByDateUseCase @Inject constructor(private val getCurrencyRatesByDateRepository: GetCurrenciesRatesByDateRepository) {
+    suspend fun getCurrenciesRateByDate(date: String): Result<CurrencyRatesResponseModel> {
         return getCurrencyRatesByDateRepository.getCurrencyRatesByDate(date)
     }
 }

@@ -30,7 +30,7 @@
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="To" />
+            android:text="@string/to" />
 
         <TextView
             android:layout_marginHorizontal="10dp"
@@ -45,7 +45,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:orientation="vertical"
@@ -129,7 +130,7 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Common Currencies Rates"
+                android:text="@string/common_currencies_rates"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
