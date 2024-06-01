@@ -1,5 +1,6 @@
 package com.task.currencyconverter.ui.home
 
+import android.annotation.SuppressLint
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -81,7 +82,7 @@ class HomeViewModel @Inject constructor(
         }
         isConversionInProgress = false
     }
-
+    @SuppressLint("SuspiciousIndentation")
     fun getTodayRateForUnit(): String{
         val index1 = currency1Index.value ?: 0
         val index2 = currency2Index.value ?: 0
@@ -96,12 +97,12 @@ class HomeViewModel @Inject constructor(
     fun swapCurrencies() {
         val tempIndex = currency1Index.value
         currency1Index.value = currency2Index.value
-        currency2Index.value = tempIndex
+        currency2Index.value = tempIndex!!
 
         // Swap the amounts as well to reflect the change
         val tempAmount = amount1.value
         amount1.value = amount2.value
-        amount2.value = tempAmount
+        amount2.value = tempAmount!!
 
         // Trigger conversion to update amounts after swap
         convertCurrency(true)

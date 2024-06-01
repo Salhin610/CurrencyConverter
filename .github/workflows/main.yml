@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
   push:
-   branches: [ main ]
+    branches: [ main , Configure-GitHub-Actions-with-lint]
 
 jobs:
   build:
@@ -28,5 +28,5 @@ jobs:
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.3.3
         with:
-          name: deployCICDGithub.apk
+          name: CurrencyConverter.apk
           path: app/build/outputs/apk/debug/app-debug.apk
