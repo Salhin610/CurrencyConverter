@@ -19,7 +19,7 @@ class HomeViewModel @Inject constructor(
     private val getCurrencyRatesUseCase: GetCurrencyRatesUseCase,
     application: Application
 ) : AndroidViewModel(application) {
-    private val _rates = HashMap<String, Double>()
+    val _rates = HashMap<String, Double>()
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
@@ -45,7 +45,7 @@ class HomeViewModel @Inject constructor(
         currency2Index.observeForever { convertCurrency(false) }
     }
 
-    private fun fetchRates() {
+    fun fetchRates() {
         viewModelScope.launch {
             try {
                 if (isInternetAvailable(appContext))
@@ -65,7 +65,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun convertCurrency(fromAmount1: Boolean) {
+    fun convertCurrency(fromAmount1: Boolean) {
         val index1 = currency1Index.value ?: 0
         val index2 = currency2Index.value ?: 0
         val amount1Value = amount1.value?.toDoubleOrNull() ?: 1.0
