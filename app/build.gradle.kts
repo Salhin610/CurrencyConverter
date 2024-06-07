@@ -57,6 +57,10 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    testImplementation (libs.mockito.inline)
+    testImplementation (libs.mockito.core)
+    testImplementation (libs.core.testing)
+    testImplementation (libs.coroutine.test)
     //RetroFit
     implementation (libs.retrofit2)
     implementation (libs.retrofit2.converter)
